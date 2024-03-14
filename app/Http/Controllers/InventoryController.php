@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Validator;
 class InventoryController extends Controller
 {
     public function Additems(Request $request){
+        if(Gate::allows('owner')){
 $validators=validator::make($request->all(), [
-'name' => 'required|unique:inventory',
+'name' => 'required',
 'price' => 'required',
 'quantity' => 'required',
 'description' => 'required',
@@ -27,8 +28,14 @@ try{$data=$request->all();
     catch(\Exception $e){
         return response()->json(['error' => "Item already exist"], 400);
       }
-
     }
+    else{
+        return response()->json(['error' => "unauthorized"], 400);
+    }
+    }
+
+
+
     public function GetEdititems($name){
         if(Gate::allows('cashier')){
         $inventory=Inventory::where('name', $name)->first();
