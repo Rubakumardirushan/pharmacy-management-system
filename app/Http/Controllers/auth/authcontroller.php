@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
-class apicontroller extends Controller
+class authcontroller extends Controller
 {
     public function register(request $request){
         $validator= validator::make($request->all(), [
@@ -26,7 +26,7 @@ if($validator->fails()){
         $user=User::create($data);
     $response['token']=$user->createToken('myapp');
     $response['name']=$user->name;
-    return response()->json(['response' => $response], 200);
+    return response()->json(['response' => 'user register Successfully'], 200);
 
 }
 

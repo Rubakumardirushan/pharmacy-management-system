@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\auth\apicontroller;
+use App\Http\Controllers\auth\authcontroller;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InventoryController;
 /*
@@ -16,11 +16,11 @@ use App\Http\Controllers\InventoryController;
 |
 */
 
-Route::post('/register', [apicontroller::class, 'register']);
+Route::post('/register', [authcontroller::class, 'register']);
 
-Route::post('/login', [apicontroller::class, 'login']);
+Route::post('/login', [authcontroller::class, 'login']);
 
-Route::post('/logout', [apicontroller::class, 'logout'])->middleware('auth:api');
+Route::post('/logout', [authcontroller::class, 'logout'])->middleware('auth:api');
 
 Route::post('/addcustomer', [CustomerController::class, 'Addcustomer'])->middleware('auth:api');
 
